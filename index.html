@@ -30,11 +30,26 @@
             position: relative;
             transition: all 0.3s ease;
         }
-        .cat-img {
+        .media-box {
             width: 150px;
             height: 150px;
-            object-fit: contain;
-            margin-bottom: 20px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Using clean CSS vectors to guarantee rendering on any mobile network */
+        .heart-icon {
+            width: 100px;
+            height: 100px;
+            fill: #ff4d6d;
+        }
+        .pulse {
+            animation: pulse-anim 0.6s infinite alternate;
+        }
+        @keyframes pulse-anim {
+            from { transform: scale(1); }
+            to { transform: scale(1.18); }
         }
         h2 {
             color: #d9383a;
@@ -75,7 +90,11 @@
 <body>
 
     <div class="card" id="main-card">
-        <img src="https://raw.githubusercontent.com/nadhra1/valn-card/main/images/0.gif" alt="Cats" class="cat-img" id="cat-gif">
+        <div class="media-box" id="illustration">
+            <svg class="heart-icon" viewBox="0 0 32 32" style="fill: #ffb3c1;">
+                <path d="M16 28.5c-.5 0-1-.2-1.4-.6l-10-10c-2.3-2.3-2.3-6.1 0-8.5 2.3-2.3 6.1-2.3 8.5 0l2.9 2.9 2.9-2.9c2.3-2.3 6.1-2.3 8.5 0 2.3 2.3 2.3 6.1 0 8.5l-10 10c-.4.4-.9.6-1.4.6z"/>
+            </svg>
+        </div>
         
         <h2 id="question">رغد تحبيني لو لا ؟</h2>
         
@@ -88,9 +107,8 @@
     <script>
         const noBtn = document.getElementById('no-btn');
         const yesBtn = document.getElementById('yes-btn');
-        const catGif = document.getElementById('cat-gif');
         const question = document.getElementById('question');
-        const card = document.getElementById('main-card');
+        const illustration = document.getElementById('illustration');
 
         let yesScale = 1;
         let noClicks = 0;
@@ -116,13 +134,15 @@
             noBtn.style.top = randomY + 'px';
         }
 
-        // Exact final message from the video reveal
         function selectYes() {
-            // EXACT REVEAL PENGUIN GIF FROM THE VIDEO
-            catGif.src = "https://raw.githubusercontent.com/nadhra1/valn-card/main/images/1.gif";
+            // Smoothly swaps to the pulsing love animation from the end of the clip
+            illustration.innerHTML = `
+                <svg class="heart-icon pulse" viewBox="0 0 32 32">
+                    <path d="M16 28.5c-.5 0-1-.2-1.4-.6l-10-10c-2.3-2.3-2.3-6.1 0-8.5 2.3-2.3 6.1-2.3 8.5 0l2.9 2.9 2.9-2.9c2.3-2.3 6.1-2.3 8.5 0 2.3 2.3 2.3 6.1 0 8.5l-10 10c-.4.4-.9.6-1.4.6z"/>
+                </svg>
+            `;
             
-            question.innerHTML = Asln Knt B3rf 7a T2oole Eh 🤍";
-            
+            question.innerHTML = "Asln Knt b3rf 7a t2oole eh 🤍";
             document.querySelector('.btn-container').style.display = 'none';
         }
     </script>
